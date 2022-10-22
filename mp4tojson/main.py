@@ -9,18 +9,19 @@ import uuid
 import click
 
 
-@click.command()
-@click.option('-d', '--debug', is_flag=True)
-@click.argument('src', type=Path)
+# @click.command()
+# @click.option('-d', '--debug', is_flag=True)
+# @click.argument('src', type=Path)
 def main(debug, src):
     level = logging.DEBUG if debug else logging.WARNING
     logging.basicConfig(format='%(message)s', level=level)
+    src = Path(src)
 
-    if src.suffix.lower() == '.mp4':
+    if src.suffix.lower() == ".mp4":
         with src.open('rb') as f:
             json.dump(mp4_to_boxes(f), sys.stdout)
     elif src.suffix.lower() == '.json':
-        with src.open('r', encoding='utf_8') as f:
+        with src.open('r', encoding='utf_16') as f:
             boxes = json.load(f)
         adjust_boxes_length(boxes)
         boxes_to_mp4(boxes, sys.stdout.buffer)
@@ -164,4 +165,5 @@ class ParseError(Exception):
 
 
 if __name__ == '__main__':
-    main()
+    main(debug=False,
+         src="_1uqL32ASRE.mp4")

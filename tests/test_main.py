@@ -5,7 +5,7 @@ from mp4tojson.main import mp4_to_boxes, adjust_boxes_length, boxes_to_mp4
 
 def test_main():
     # https://www.sample-videos.com/
-    with open('_6L8liyKl24.mp4', 'rb') as f:
+    with open('video_test.mp4', 'rb') as f:
         src_bytes = f.read()
 
     src_stream = io.BytesIO(src_bytes)
